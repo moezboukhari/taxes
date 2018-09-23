@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template1">
+<head>
+<meta charset="utf-8" />
+<title>Hellow entreprise</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container">
+		<div class="card border border-primary">
+			<div class="card-header ">Liste des Taxes</div>
+			<div class="card-body ">
+			<div class="container   border border-info">
+			<form th:action="@{/taxes}" method="get" id="f">
+			<label>Entreprise :</label> 
+			<select name="code" onchange="document.getElementById('f').submit()">
+			<option th:each="e:${entreprises}" th:text="${e.nom}" th:value="${e.code}" >
+			</option>
+			</select>
+
+			<button class="btn btn-primary" type="submit">Chercher</button>
+			</form>
+			</div>
+			
+				<table class="table table-striped border border-primary ">
+					<tr>
+					    <th>ID</th>
+						<th>Titre</th>
+						<th>Date</th>
+						<th>Montant</th>
+						<th>Type</th>
+					</tr>
+					<tr th:each="t:${taxes}">
+						<td th:text="${t.id}"></td>
+						<td th:text="${t.titre}"></td>
+						<td th:text="${t.dateTaxe}"></td>
+						<td th:text="${t.montant}"></td>
+						<td th:text="${t.class.simpleName}"></td>
+						
+					</tr>
+				</table>
+				
+				<div>
+					<ul class="nav nav-pills"  >
+						<li    th:each="i,status:${indexPages}">
+						<a  th:class="${status.index==currentPage} ? 'nav-link active':'nav-link'" 
+						th:href="@{/entreprises(page=${status.index},motCle=${motCle})}" th:text="${status.index}"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

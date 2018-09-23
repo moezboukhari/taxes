@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template1">
+<head>
+<meta charset="utf-8" />
+<title>Hellow entreprise</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container col-md-6">
+		<div class="card border border-primary">
+			<div class="card-header ">Saisie Entreprise</div>
+			<div class="card-body ">
+				<form th:action="@{saveEntreprise}"  method="post">
+
+					<div class="form-group">
+						<label for="nomEnt">Nom Entreprise</label> 
+						<input type="text"
+							class="form-control" name="nom" th:value="${entreprise.nom}" id="nomEnt" 
+							placeholder="Nom Entreprise" aria-describedby="nomHelp">
+							<small id="nomHelp"
+							class="form-text  text-danger" th:errors="${entreprise.nom}"></small>
+					</div>
+					<div class="form-group">
+						<label for="EmailEnt">Email Entreprise</label> 
+						<input type="email"
+							class="form-control" name="email" th:value="${entreprise.email}" id="EmailEnt" aria-describedby="emailHelp"
+							placeholder="Entrer email"> <small id="emailHelp"
+							class="form-text text-muted text-danger" th:errors="${entreprise.email}"></small>
+					</div>
+					<div class="form-group">
+						<label for="RS">Raison Social</label> 
+						<input type="text"
+							class="form-control" name="raisonSociale" th:value="${entreprise.raisonSociale}" id="RS" aria-describedby="RSlHelp" placeholder="Raison Social">
+							<small id="RSHelp"
+							class="form-text  text-danger" th:errors="${entreprise.raisonSociale}"></small>
+					</div>
+					 <button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+
+
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

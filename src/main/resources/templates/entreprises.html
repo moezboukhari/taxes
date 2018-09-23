@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template1">
+<head>
+<meta charset="utf-8" />
+<title>Hellow entreprise</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container">
+		<div class="card border border-primary">
+			<div class="card-header ">Liste des Entreprises</div>
+			<div class="card-body ">
+			<div class="container   border border-info">
+			<form th:action="@{/entreprises}" method="get">
+			<label>Mot Clé</label> 
+			<input type="text" name="motCle" th:value="${motCle}" />
+			<button class="btn btn-primary" type="submit">Chercher</button>
+			</form>
+			</div>
+			
+				<table class="table table-striped border border-primary ">
+					<tr>
+						<th>Code</th>
+						<th>Nom</th>
+						<th>Email</th>
+						<th>Raison Sociale</th>
+					</tr>
+					<tr th:each="e:${listeEntreprises}">
+						<td th:text="${e.code}"></td>
+						<td th:text="${e.nom}"></td>
+						<td th:text="${e.email}"></td>
+						<td th:text="${e.raisonSociale}"></td>
+						<td><a th:href="@{/taxes(code=${e.code})}">Taxes</a></td>
+					</tr>
+				</table>
+				
+				<div>
+					<ul class="nav nav-pills"  >
+						<li    th:each="i,status:${indexPages}">
+						<a  th:class="${status.index==currentPage} ? 'nav-link active':'nav-link'" 
+						th:href="@{/entreprises(page=${status.index},motCle=${motCle})}" th:text="${status.index}"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
