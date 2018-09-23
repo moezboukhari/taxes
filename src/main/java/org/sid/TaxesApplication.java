@@ -13,7 +13,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class TaxesApplication implements CommandLineRunner{
-
 	@Autowired
 private EntrepriseRepository etrepriseRepository;
 	@Autowired
